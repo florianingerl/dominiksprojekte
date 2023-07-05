@@ -1,7 +1,9 @@
 <template>
     <div class="sidenav">
+    <router-link to="home">Home</router-link>
     <router-link to="helloworld">Hello World</router-link>
     <router-link to="users">Users</router-link>
+    <router-link to="aboutme">About me</router-link>
     </div>
 
 <div class="main">

@@ -1,6 +1,6 @@
 const sqlite3 = require('sqlite3').verbose();
 
-var db = new sqlite3.Database('./test.db', sqlite3.OPEN_READWRITE, (err) => {
+var db = new sqlite3.Database('./fotos.db', sqlite3.OPEN_READWRITE, (err) => {
     if (err) {
       console.error(err.message);
     }
@@ -10,6 +10,14 @@ var db = new sqlite3.Database('./test.db', sqlite3.OPEN_READWRITE, (err) => {
 });
 
 
+let getAllFotos = function( callback ){
+    db.all("select * from fotos", [], (err, rows) => {
+        if (err) {
+          throw err;
+        }
+        callback(rows)
+      });
+};
 
 
 var getAllUsers = function( callback ){
@@ -33,6 +41,7 @@ var deleteUser = function(id, callback ){
 
 module.exports = {
     getAllUsers,
-    deleteUser
+    deleteUser,
+    getAllFotos
 
 };
