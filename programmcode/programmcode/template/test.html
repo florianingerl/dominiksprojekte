@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" 
+    integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" 
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab&family=Roboto:wght@500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="CSS/style.css">
+  
+   
+</head>
+<body>
+
+    <button onclick="showContent()">Show hidden content</button>
+
+<template>
+  <h2>Flower</h2>
+  <img src="fotos/domi1.jpg" width="214" height="204">
+  <textarea class="random" placeholder="Ihre Bewertung" style="height: 200px;"></textarea>
+  <button>Abschicken</button>
+</template>
+
+
+<div id="demo">
+
+</div>
+
+
+
+<script>
+    function loadFotos( callback ){
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                var res = JSON.parse(this.responseText);
+                document.getElementById("demo").innerHTML = res;
+                callback(res);
+                
+            }
+        };
+
+
+        xhttp.open("GET", "showfotos", true);
+        xhttp.send();
+    }
+    loadFotos( (fotos) => {
+        let temp = document.getElementsByTagName("template")[0];
+        fotos.forEach( (foto) => {
+            var clon = temp.content.cloneNode(true);
+            clon.querySelectorAll("h2")[0].innerHTML = foto.fotoname;
+            clon.querySelectorAll("img")[0].src = "fotos/" + foto.fotoname;
+            let bewertung = clon.querySelectorAll(".random")[0].value;
+            clon.querySelectorAll("button")[0].onclick = () => {
+                console.log(bewertung);
+                alert("The button for the picture " + foto.fotoname + " was clicked!");
+            };
+            document.body.appendChild(clon);
+        } );
+        
+    });
+
+    </script>
+</body>
+
+</html>

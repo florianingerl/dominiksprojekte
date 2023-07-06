@@ -1,13 +1,18 @@
 drop table if exists fotos;
+drop table if exists bewertungen;
 
 create table fotos (
+    fotoname TEXT NOT NULL PRIMARY KEY
+);
+
+create table bewertungen (
+    id Integer AUTO_INCREMENT PRIMARY KEY,
     fotoname TEXT NOT NULL,
-    commentary TEXT,
-    bewertung Integer
+    bewertung Integer NOT NULL,
+    Foreign Key (fotoname) references fotos (fotoname)
 );
 
 insert into fotos
- (fotoname, commentary, bewertung)
- values ("Florian", "Ingerl", 5),
-        ("Hermann", "Ingerl", 10),
-        ("Michael", "Ende", 18);
+ (fotoname)
+ values ("domi1.jpg"),
+        ("domi2.png");
