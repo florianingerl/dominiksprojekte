@@ -38,11 +38,7 @@ app.get('/showusers', (req, res) => {
     });
 });
 
-app.get('/showfotos', (req, res) => {
-  sqlite3db.getAllFotos( (rows) => {
-    res.json(rows);
-});
-});
+
 
 
 

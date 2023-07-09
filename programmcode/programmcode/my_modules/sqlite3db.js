@@ -20,28 +20,8 @@ let getAllFotos = function( callback ){
 };
 
 
-var getAllUsers = function( callback ){
-    db.all("select * from users", [], (err, rows) => {
-        if (err) {
-          throw err;
-        }
-        callback(rows)
-      });
-};
-
-
-var deleteUser = function(id, callback ){
-    db.run("delete from users where id = " + id, [], (err) => {
-        if(err){
-            throw err;
-        }
-        getAllUsers(callback);
-    });
-};
 
 module.exports = {
-    getAllUsers,
-    deleteUser,
     getAllFotos
 
 };

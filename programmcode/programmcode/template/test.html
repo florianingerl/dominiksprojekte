@@ -19,10 +19,12 @@
     <button onclick="showContent()">Show hidden content</button>
 
 <template>
+<div>
   <h2>Flower</h2>
   <img src="fotos/domi1.jpg" width="214" height="204">
-  <textarea class="random" placeholder="Ihre Bewertung" style="height: 200px;"></textarea>
+  <textarea rows="3" cols="50"> </textarea>
   <button>Abschicken</button>
+</div>
 </template>
 
 
@@ -51,15 +53,17 @@
     loadFotos( (fotos) => {
         let temp = document.getElementsByTagName("template")[0];
         fotos.forEach( (foto) => {
-            var clon = temp.content.cloneNode(true);
+            let clon = temp.content.cloneNode(true);
+            clon = clon.querySelectorAll("div")[0];
             clon.querySelectorAll("h2")[0].innerHTML = foto.fotoname;
             clon.querySelectorAll("img")[0].src = "fotos/" + foto.fotoname;
-            let bewertung = clon.querySelectorAll(".random")[0].value;
             clon.querySelectorAll("button")[0].onclick = () => {
+                let bewertung = clon.querySelectorAll("textarea")[0].value;
                 console.log(bewertung);
-                alert("The button for the picture " + foto.fotoname + " was clicked!");
             };
+        
             document.body.appendChild(clon);
+            
         } );
         
     });
